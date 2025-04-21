@@ -46,7 +46,7 @@ user_response = st.text_area("Your Answer", height=250)
 
 if st.button("Submit Answer") and user_response:
     with st.spinner("Generating feedback using Gemini..."):
-        model = genai.GenerativeModel("gemini-pro")
+        model = genai.GenerativeModel(model_name="models/gemini-pro")
         messages = [
             f"Case Prompt: {example_prompts[case_type]}",
             f"Candidate Response: {user_response}",
