@@ -2,9 +2,9 @@
 import streamlit as st
 import random
 
-st.set_page_config(page_title="Product Case Prep Buddy (Offline)", page_icon="🧠")
+st.set_page_config(page_title="Product Case Prep Buddy", page_icon="🧠")
 
-st.title("🧠 Product Case Prep Buddy (Offline Demo)")
+st.title("🧠 Product Case Prep Buddy")
 st.write("Practice product management cases and view sample answers.")
 
 case_type = st.sidebar.selectbox("Select Case Type", [
