@@ -4,8 +4,8 @@ import google.generativeai as genai
 import os
 
 # Page setup
-st.set_page_config(page_title="Product Case Prep Buddy (Gemini)", page_icon="🌟")
-st.title("🌟 Product Case Prep Buddy (Gemini)")
+st.set_page_config(page_title="Haas Product Case Prep Buddy", page_icon="🌟")
+st.title("🌟 Product Case Prep Buddy")
 st.write("Practice product management case questions and receive AI-generated feedback using Gemini Pro.")
 
 # Gemini API Key input (can be managed through Streamlit Secrets or UI)
