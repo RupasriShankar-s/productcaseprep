@@ -1,4 +1,3 @@
-
 import streamlit as st
 import google.generativeai as genai
 import os
@@ -60,6 +59,14 @@ if st.button("Submit Answer") and user_response:
 
         st.subheader("📋 AI Feedback")
         st.markdown(response.text)
+
+        # Download button for feedback
+        st.download_button(
+            label="📥 Download Feedback",
+            data=response.text,
+            file_name="case_feedback.txt",
+            mime="text/plain"
+        )
 
 st.markdown("---")
 st.markdown("_Note: Gemini Pro is used for all feedback generation. Toggle Hint Mode for coaching-style tips._")
