@@ -29,8 +29,8 @@ case_type = st.sidebar.selectbox("Select Case Type", [
 
 hint_mode = st.sidebar.checkbox("Hint Mode")
 
-# Prompts
-example_prompts = {
+# Default prompts
+default_prompts = {
     "Design a New Feature": "Design a new feature for Airbnb to help solo travelers.",
     "Improve a Metric": "Instagram engagement is down 20% among Gen Z. What would you do?",
     "Evaluate a Product": "Evaluate the success of Google Pixel phones.",
@@ -38,16 +38,32 @@ example_prompts = {
     "Launch Strategy": "How would you launch a new grocery delivery app in a mid-sized U.S. city?"
 }
 
-st.subheader("🧠 Case Prompt")
-st.write(f"**Prompt:** {example_prompts[case_type]}")
+# Initialize session state for dynamic prompt
+if "dynamic_prompt" not in st.session_state:
+    st.session_state.dynamic_prompt = default_prompts[case_type]
 
+# Handle prompt refresh
+col1, col2 = st.columns([10, 1])
+with col1:
+    st.subheader("🧠 Case Prompt")
+    st.write(f"**Prompt:** {st.session_state.dynamic_prompt}")
+with col2:
+    if st.button("🔄", help="Refresh prompt"):
+        with st.spinner("Generating new prompt..."):
+            model = genai.GenerativeModel(model_name="gemini-2.0-flash")
+            response = model.generate_content([
+                f"Generate a fresh product management case interview question in the category: {case_type}. Be concise and realistic."
+            ])
+            st.session_state.dynamic_prompt = response.text.strip()
+
+# User response input
 user_response = st.text_area("Your Answer", height=250)
 
 if st.button("Submit Answer") and user_response:
     with st.spinner("Generating feedback using Gemini..."):
         model = genai.GenerativeModel(model_name="gemini-2.0-flash")
         messages = [
-            f"Case Prompt: {example_prompts[case_type]}",
+            f"Case Prompt: {st.session_state.dynamic_prompt}",
             f"Candidate Response: {user_response}",
             "You are a product management case interview coach. Provide structured feedback based on frameworks like CIRCLES, AARM, or product metrics. Be clear, concise, and helpful."
         ]
