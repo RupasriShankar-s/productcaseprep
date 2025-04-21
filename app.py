@@ -6,7 +6,7 @@ import os
 # Page setup
 st.set_page_config(page_title="Haas Product Case Prep Buddy", page_icon="🌟")
 st.title("🌟 Product Case Prep Buddy")
-st.write("Practice product management case questions and receive AI-generated feedback using Gemini Pro.")
+st.write("Practice product management case questions and receive AI-generated feedback from your handy dandy HaaSistant")
 
 # Gemini API Key input (can be managed through Streamlit Secrets or UI)
 api_key = st.secrets.get("GEMINI_API_KEY", None)
